@@ -30,7 +30,7 @@ const Pagination = ({
           variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
           onClick={() => {
-            setSearchParam((oldParams) => {
+            setSearchParam((oldParams: any) => {
               const params = new URLSearchParams(oldParams);
               params.set("page", "1");
               return params;
@@ -66,7 +66,7 @@ const Pagination = ({
           variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
           onClick={() => {
-            setSearchParam((oldParams) => {
+            setSearchParam((oldParams: any) => {
               const params = new URLSearchParams(oldParams);
               params.set("page", totalPages.toString());
               return params;
