@@ -1,17 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Overview } from "../../components/Overview";
+import Pagination from "../../components/Pagination";
 import { PieChartC } from "../../components/PieChartC";
 import { columns } from "../../components/table/column";
 import { DataTable } from "../../components/table/data-table";
-import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -143,9 +137,6 @@ const Dashboard = () => {
             <h2 className="text-3xl font-bold tracking-tight">
               Hi, Welcome back 👋
             </h2>
-            <div className="hidden items-center space-x-2 md:flex">
-              <Button>Download</Button>
-            </div>
           </div>
 
           <Card>
@@ -217,65 +208,13 @@ const Dashboard = () => {
               )}
 
               {/* Pagination */}
-              <div className="flex items-center space-x-6 lg:space-x-8 mt-4">
-                <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-                  Page {currentPage} of {totalPages}
-                </div>
-                <div className="flex items-center space-x-2">
-                  {/* Go to first page */}
-                  <Button
-                    variant="outline"
-                    className="hidden h-8 w-8 p-0 lg:flex"
-                    onClick={() => {
-                      setSearchParam((oldParams) => {
-                        const params = new URLSearchParams(oldParams);
-                        params.set("page", "1");
-                        return params;
-                      });
-                    }}
-                    disabled={currentPage === 1}
-                  >
-                    <span className="sr-only">Go to first page</span>
-                    <DoubleArrowLeftIcon className="h-4 w-4" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="h-8 w-8 p-0"
-                    onClick={handlePreviousPage}
-                    disabled={currentPage === 1}
-                  >
-                    <span className="sr-only">Go to previous page</span>
-                    <ChevronLeftIcon className="h-4 w-4" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="h-8 w-8 p-0"
-                    onClick={handleNextPage}
-                    disabled={currentPage === totalPages || totalPages === 1}
-                  >
-                    <span className="sr-only">Go to next page</span>
-                    <ChevronRightIcon className="h-4 w-4" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="hidden h-8 w-8 p-0 lg:flex"
-                    onClick={() => {
-                      setSearchParam((oldParams) => {
-                        const params = new URLSearchParams(oldParams);
-                        params.set("page", totalPages.toString());
-                        return params;
-                      });
-                    }}
-                    disabled={currentPage === totalPages || totalPages === 1}
-                  >
-                    <span className="sr-only">Go to last page</span>
-                    <DoubleArrowRightIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                handleNextPage={handleNextPage}
+                handlePreviousPage={handlePreviousPage}
+                setSearchParam={setSearchParam}
+              />
 
               {statisticsIsLoading ? (
                 <Skeleton className="w-[200px] h-96" />
