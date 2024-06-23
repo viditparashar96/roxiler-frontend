@@ -125,8 +125,8 @@ const Dashboard = () => {
   }, [transactionMonth]);
 
   useEffect(() => {
-    if (transactionData) {
-      setTotalPages(transactionData?.data?.pagination.totalPages);
+    if (transactionData && transactionData.data) {
+      setTotalPages(transactionData.data.pagination.totalPages);
     }
   }, [transactionData]);
 

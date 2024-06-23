@@ -21,21 +21,21 @@ export const useGetTransactions = ({
   transactionMonth: string;
 }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_TRANSACTIONS],
+    queryKey: [QUERY_KEYS.GET_TRANSACTIONS, page, search, transactionMonth],
     queryFn: () => getTransactions({ page, search, transactionMonth }),
   });
 };
 
 export const useGetBarChartData = ({ month }: { month: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_BAR_CHART_DATA],
+    queryKey: [QUERY_KEYS.GET_BAR_CHART_DATA, month],
     queryFn: () => getBarchartData({ month }),
   });
 };
 
 export const useGetPieChartData = ({ month }: { month: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_PIE_CHART_DATA],
+    queryKey: [QUERY_KEYS.GET_PIE_CHART_DATA, month],
     queryFn: () => getPieChartData({ month }),
   });
 };

@@ -18,9 +18,9 @@ export const getTransactions = async (data: {
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     // console.log(error);
-    return { err: error };
+    return { error: error.response ? error.response.data : error.message };
   }
 };
 
@@ -35,9 +35,9 @@ export const getBarchartData = async (data: { month: string }) => {
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     // console.log(error);
-    return { err: error };
+    return { error: error.response ? error.response.data : error.message };
   }
 };
 
@@ -52,9 +52,9 @@ export const getPieChartData = async (data: { month: string }) => {
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     // console.log(error);
-    return { err: error };
+    return { error: error.response ? error.response.data : error.message };
   }
 };
 
@@ -70,8 +70,8 @@ export const getStatistics = async (data: { month: string }) => {
       }
     );
     return response;
-  } catch (error) {
+  } catch (error: any) {
     // console.log(error);
-    return { err: error };
+    return { error: error.response ? error.response.data : error.message };
   }
 };
