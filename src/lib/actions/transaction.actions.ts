@@ -53,7 +53,6 @@ export const getPieChartData = async (data: { month: string }) => {
 
 export const getStatistics = async (data: { month: string }) => {
   try {
-    console.log("data in statiscis===>", data);
     const response = await axios_instance.get(
       `/api/v1/transaction/statistics`,
       {
