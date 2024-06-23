@@ -29,6 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
+import { Skeleton } from "../../components/ui/skeleton";
 import { months } from "../../constants/data";
 import {
   useGetBarChartData,
@@ -69,7 +70,7 @@ const Dashboard = () => {
 
   const {
     data: statisticsData,
-
+    isLoading: statisticsIsLoading,
     refetch: refetchStatistics,
   } = useGetStatistics({ month: transactionMonth });
 
@@ -130,9 +131,6 @@ const Dashboard = () => {
     }
   }, [transactionData]);
 
-  if (isLoading || barChartIsLoading || pieChartIsLoading) {
-    return <div>Loading...</div>;
-  }
   if (isError || barChartIsError || pieChartIsError) {
     return <div>Error</div>;
   }
@@ -197,7 +195,7 @@ const Dashboard = () => {
                     <SelectGroup>
                       <SelectLabel>Select Month</SelectLabel>
                       <SelectItem value={"All"}>All</SelectItem>
-                      {months.map((month: any) => (
+                      {months?.map((month: any) => (
                         <SelectItem key={month.id} value={month?.id}>
                           {month.name}
                         </SelectItem>
@@ -208,11 +206,16 @@ const Dashboard = () => {
               </div>
             </CardHeader>
             <CardContent className="overflow-x-auto">
-              <DataTable
-                columns={columns}
-                //@ts-ignore
-                data={transactionData?.data?.transactions}
-              />
+              {isLoading || barChartIsLoading || pieChartIsLoading ? (
+                <Skeleton className="w-full h-96" />
+              ) : (
+                <DataTable
+                  columns={columns}
+                  //@ts-ignore
+                  data={transactionData?.data?.transactions}
+                />
+              )}
+
               {/* Pagination */}
               <div className="flex items-center space-x-6 lg:space-x-8 mt-4">
                 <div className="flex w-[100px] items-center justify-center text-sm font-medium">
@@ -274,38 +277,44 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <Card className="  max-w-[300px] mt-6">
-                <CardHeader className="flex ">
-                  <CardTitle>Statistics</CardTitle>
-                </CardHeader>
-                <CardContent className="pl-2">
-                  <div className="flex flex-col space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">Total Sales</span>
-                      <span className="text-xl font-bold">
-                        Rs.{statisticsData?.data?.totalSaleAmount}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        Total Sold Itmes
-                      </span>
-                      <span className="text-xl font-bold">
-                        {statisticsData?.data?.totalSoldItems}
-                      </span>
-                    </div>
+              {statisticsIsLoading ? (
+                <Skeleton className="w-[200px] h-96" />
+              ) : (
+                <Card className="  max-w-[300px] mt-6">
+                  <CardHeader className="flex ">
+                    <CardTitle>Statistics</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2">
+                    <div className="flex flex-col space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-500">
+                          Total Sales
+                        </span>
+                        <span className="text-xl font-bold">
+                          Rs.{statisticsData?.data?.totalSaleAmount.toFixed(2)}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-500">
+                          Total Sold Itmes
+                        </span>
+                        <span className="text-xl font-bold">
+                          {statisticsData?.data?.totalSoldItems}
+                        </span>
+                      </div>
 
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        Total Not Sold Items
-                      </span>
-                      <span className="text-xl font-bold">
-                        {statisticsData?.data?.totalNotSoldItems}
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-500">
+                          Total Not Sold Items
+                        </span>
+                        <span className="text-xl font-bold">
+                          {statisticsData?.data?.totalNotSoldItems}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              )}
             </CardContent>
           </Card>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">

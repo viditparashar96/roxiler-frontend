@@ -24,7 +24,7 @@ export const PieChartC = ({ data }: any) => {
           fill="#8884d8"
           label
         >
-          {data.map((_: any, index: number) => (
+          {data?.map((_: any, index: number) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
