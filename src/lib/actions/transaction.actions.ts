@@ -8,7 +8,7 @@ export const getTransactions = async (data: {
 }) => {
   try {
     const response = await axios_instance.get(
-      `${env_config.api_url}/transaction/transactions`,
+      `${env_config.api_url}/api/v1/transaction/transactions`,
       {
         params: {
           page: data.page,
@@ -26,7 +26,7 @@ export const getTransactions = async (data: {
 export const getBarchartData = async (data: { month: string }) => {
   try {
     const response = await axios_instance.get(
-      `${env_config.api_url}/transaction/bar-chart-data`,
+      `${env_config.api_url}/api/v1/transaction/bar-chart-data`,
       {
         params: {
           month: data.month,
@@ -42,7 +42,7 @@ export const getBarchartData = async (data: { month: string }) => {
 export const getPieChartData = async (data: { month: string }) => {
   try {
     const response = await axios_instance.get(
-      `${env_config.api_url}/transaction/pie-chart`,
+      `${env_config.api_url}/api/v1/transaction/pie-chart`,
       {
         params: {
           month: data.month,
@@ -59,7 +59,7 @@ export const getStatistics = async (data: { month: string }) => {
   try {
     console.log("data in statiscis===>", data);
     const response = await axios_instance.get(
-      `${env_config.api_url}/transaction/statistics`,
+      `${env_config.api_url}/api/v1/transaction/statistics`,
       {
         params: {
           month: data.month,
