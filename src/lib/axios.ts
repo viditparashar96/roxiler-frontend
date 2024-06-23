@@ -1,22 +1,9 @@
 import axios from "axios";
-// import { enf_conf } from "../config/env.config";
+import { env_config } from "../config/env_config";
 
 export const axios_instance = axios.create({
-  baseURL: "https://rag-gvmp.onrender.com/api/v1",
+  baseURL: env_config.api_url,
   withCredentials: true,
 });
-
-axios_instance.interceptors.request.use(
-  (config: any) => {
-    const session = localStorage.getItem("session");
-    if (session) {
-      config.headers["Authorization"] = session;
-    }
-    return config;
-  },
-  (error: any) => {
-    return Promise.reject(error);
-  }
-);
 
 export default axios_instance;
