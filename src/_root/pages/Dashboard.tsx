@@ -47,7 +47,7 @@ const Dashboard = () => {
     isError,
     isLoading,
     refetch: refetchTransactions,
-  } = useGetTransactions({
+  }: any = useGetTransactions({
     page: currentPage,
     search: search,
     transactionMonth: transactionMonth,
@@ -126,7 +126,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (transactionData) {
-      //@ts-ignore
       setTotalPages(transactionData?.data?.pagination.totalPages);
     }
   }, [transactionData]);
