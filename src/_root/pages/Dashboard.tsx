@@ -47,7 +47,7 @@ const Dashboard = () => {
     isError,
     isLoading,
     refetch: refetchTransactions,
-  }: any = useGetTransactions({
+  } = useGetTransactions({
     page: currentPage,
     search: search,
     transactionMonth: transactionMonth,
