@@ -137,6 +137,9 @@ const Dashboard = () => {
             <h2 className="text-3xl font-bold tracking-tight">
               Hi, Welcome back 👋
             </h2>
+              <p className="text-sm opacity-80  tracking-tight">
+              The initial loading can take upto 50 sec because backend is deployed on render.com for free.
+            </p>
           </div>
 
           <Card>
